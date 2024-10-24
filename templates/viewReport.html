@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crime Reporting Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/crimeReport.css' %}">
+</head>
+<body>
+    <!-- Dashboard Structure -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Dashboard</h2>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                {% if not user.is_superuser %}
+                <li><a href="/crimeReport">Report Crime</a></li>
+                {% endif %}
+                <li><a href="/viewReport">View Reports</a></li>
+                <li><a href="/settings">Settings</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header>
+                <h2>Crime Reporting Dashboard</h2>
+                <p>Welcome, {{user.username}}!</p>
+            </header>
+
+            {% if not user.is_superuser %}
+            <!-- Crime Reporting Form -->
+            <section class="crime-report-section">
+                <div class="crime-report-box">
+                    <h2>Reports</h2>
+                    <table>
+                        <thead>
+                            <th>ID</th>
+                            <th>CRIME TYPE</th>
+                            <th>LOCATION OF CRIME</th>
+                            <th>DESCRIPTION</th>
+                            <th>EVIDENCE</th>
+                            <th>STATUS</th>
+                            <th>ACTIONS</th>
+                        </thead>
+                        <tbody>
+                            {% if crimes %}
+                            {% for crime in crimes %}
+                            <tr>
+                                <td>ID-{{crime.id}}</td>
+                                <td>{{crime.crime_type}}</td>
+                                <td>{{crime.location}}</td>
+                                <td>{{crime.description}}</td>
+                                <td><a href="{{crime.evidence.url}}">{{crime.evidence}}</a></td>
+                                {% if crime.status %}
+                                <td style="color: green">RECIEVED</td>
+                                {% else %}
+                                <td style="color: red">NOT RECIEVED!</td>
+                                {% endif %}
+                                <td>
+                                    {% if not crime.status %}
+                                    <a href="/delete-crime/{{crime.id}}" style="background-color: red; color: #fff; text-decoration: none; padding: 10px; border-radius: 5px;">DELETE</a>
+                                    {% else %}
+                                    <a href="#" style="background-color: red; color: #fff; text-decoration: none; padding: 10px; border-radius: 5px; opacity: .3;">DELETE</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td>No Reports Yet!</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            {% else %}
+            <!-- Crime Reporting Form -->
+            <section class="crime-report-section">
+                <div class="crime-report-box">
+                    <h2>Reports</h2>
+                    <table>
+                        <thead>
+                            <th>ID</th>
+                            <th>REPORTER NAME</th>
+                            <th>REPORTER EMAIL</th>
+                            <th>CRIME TYPE</th>
+                            <th>LOCATION OF CRIME</th>
+                            <th>DESCRIPTION</th>
+                            <th>EVIDENCE</th>
+                            <th>ACTION</th>
+                        </thead>
+                        <tbody>
+                            {% if all_crimes %}
+                            {% for crime in all_crimes %}
+                            <tr>
+                                <td>ID-{{crime.id}}</td>
+                                <td>{{crime.full_name}}</td>
+                                <td>{{crime.email_address}}</td>
+                                <td>{{crime.crime_type}}</td>
+                                <td>{{crime.location}}</td>
+                                <td>{{crime.description}}</td>
+                                <td><a href="{{crime.evidence.url}}">{{crime.evidence}}</a></td>
+                                <td>
+                                    {% if crime.status %}
+                                    <a href="#" style="background-color: dodgerblue; color: #fff; text-decoration: none; padding: 10px; border-radius: 5px;">RECIEVED</a>
+                                    {% else %}
+                                    <a href="/update-crime/{{crime.id}}" style="background-color: yellow; color: black; text-decoration: none; padding: 10px; border-radius: 5px; border: 1px solid black;">RECIEVE?</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td>No Reports Yet!</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            {% endif %}
+        </main>
+    </div>
+</body>
+</html>

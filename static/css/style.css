@@ -1,0 +1,123 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Body background */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(145deg, #ff9a9e, #fad0c4);
+}
+
+/* 3D login container */
+.login-container {
+    perspective: 1000px;
+}
+
+.login-box {
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2);
+    transform: rotateY(20deg) rotateX(10deg);
+    width: 100%;
+    transition: all 0.5s ease;
+}
+
+.login-box:hover {
+    transform: rotateY(0deg) rotateX(0deg);
+}
+
+/* Form headings and buttons */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    background: #f0f0f0;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #333;
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    background: #e9e9e9;
+    box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.input-group label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label {
+    top: -10px;
+    left: 10px;
+    color:  #f36;
+    font-size: 12px;
+}
+
+.error{
+    color: red;
+}
+
+.success{
+    color: green;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(145deg, #ff9a9e, #fad0c4);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: linear-gradient(145deg, #ff7a7a, #fab1b1);
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.signup-link a {
+    color:  #f36;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crime Reporting Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/crimeReport.css' %}">
+</head>
+<body>
+    <!-- Dashboard Structure -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Dashboard</h2>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                {% if not user.is_superuser %}
+                <li><a href="/crimeReport">Report Crime</a></li>
+                {% endif %}
+                <li><a href="/viewReport">View Reports</a></li>
+                <li><a href="/settings">Settings</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header>
+                <h2>Crime Reporting Dashboard</h2>
+                <p>Welcome, {{user.username}}!</p>
+            </header>
+
+            <!-- Crime Reporting Form -->
+            <section class="crime-report-section">
+                <div class="crime-report-box">
+                    <h2>Report a Crime</h2>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% comment %} <div class="input-group">
+                            <input type="text" required>
+                            <label>Full Name</label>
+                        </div> {% endcomment %}
+                        {% comment %} <div class="input-group">
+                            <input type="email" required>
+                            <label>Email Address</label>
+                        </div> {% endcomment %}
+                        <div class="input-group">
+                            <input type="text" name="crime_type" required>
+                            <label>Crime Type</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" name="location" required>
+                            <label>Location of Crime</label>
+                        </div>
+                        <div class="input-group">
+                            <textarea name="description" required></textarea>
+                            <label>Description of the Crime</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="file" name="evidence" id="upload" required>
+                            <label for="#upload" class="file-label">Upload Evidence</label>
+                        </div>
+                        <button type="submit" class="btn">Submit Report</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

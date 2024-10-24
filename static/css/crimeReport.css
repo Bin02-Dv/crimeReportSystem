@@ -1,0 +1,196 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Body styling */
+body {
+    display: flex;
+    background: #f4f4f9;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 100vw;
+    background-color: #333;
+    padding: 30px 15px;
+    color: #fff;
+    box-shadow: 10px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+    font-size: 22px;
+    text-align: center;
+    color: #fff;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    margin: 20px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+}
+
+.sidebar ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    /* text-align: left; */
+}
+
+header h2 {
+    margin-bottom: 5px;
+    font-size: 24px;
+}
+
+/* Crime Report Section */
+.crime-report-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* 3D Crime Report Form */
+.crime-report-box {
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2);
+    transform: rotateY(10deg) rotateX(5deg);
+    width: 100%;
+    transition: all 0.5s ease;
+}
+
+.crime-report-box:hover {
+    transform: rotateY(0deg) rotateX(0deg);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form Input Styling */
+.input-group {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 10px;
+    background: #f0f0f0;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #333;
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.input-group textarea {
+    height: 100px;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    background: #e9e9e9;
+    box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.input-group label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label,
+.input-group textarea:focus + label,
+.input-group textarea:valid + label {
+    top: -10px;
+    left: 10px;
+    color: #f36;
+    font-size: 12px;
+}
+
+/* File upload */
+/* #upload {
+    display: none;
+} */
+
+.file-label {
+    display: block;
+    padding: 10px;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-label:hover {
+    background: #e9e9e9;
+}
+
+/* Button */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(145deg, #ff9a9e, #fad0c4);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: linear-gradient(145deg, #ff7a7a, #fab1b1);
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.error{
+    color: red;
+    text-align: center;
+}
+
+.success{
+    text-align: center;
+    color: green;
+}

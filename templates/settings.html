@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crime Reporting Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/crimeReport.css' %}">
+</head>
+<body>
+    <!-- Dashboard Structure -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Dashboard</h2>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                {% if not user.is_superuser %}
+                <li><a href="/crimeReport">Report Crime</a></li>
+                {% endif %}
+                <li><a href="/viewReport">View Reports</a></li>
+                <li><a href="/settings">Settings</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header>
+                <h2>Crime Reporting Dashboard</h2>
+                <p>Welcome, {{user.username}}!</p>
+            </header>
+
+            <!-- Crime Reporting Form -->
+            <section class="crime-report-section">
+                <div class="crime-report-box">
+                    <h2>Update Password</h2>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if messages %}
+                        {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                        <div class="error">{{message}}</div><br><br>
+                        {% else %}
+                        <div class="success">{{message}}</div><br><br>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        <div class="input-group">
+                            <input type="email" value="{{user.email}}" disable style="opacity: .4;">
+                            <label>Email Address</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" name="password" required>
+                            <label>Password</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" name="cpassword" required>
+                            <label>Confirm Password</label>
+                        </div>
+                        <button type="submit" class="btn">Update</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
