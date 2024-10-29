@@ -30,6 +30,7 @@ def signup(request):
     if request.method == 'POST':
         full_name = request.POST['full_name']
         email = request.POST['email']
+        nin = request.POST['nin']
         username = request.POST['username']
         password = request.POST['password']
         cpassword = request.POST['cpassword']
@@ -44,7 +45,7 @@ def signup(request):
             messages.error(request, 'Password and confirm password missed match!!')
             return redirect('signup')
         else:
-            new_user = User.objects.create_user(username=username, email=email, password=password, first_name=full_name)
+            new_user = User.objects.create_user(username=username, email=email, password=password, first_name=full_name, )
             new_user.save()
             messages.success(request, 'Sign Up completed successfully...')
             return redirect('login')
@@ -53,9 +54,10 @@ def signup(request):
 @login_required(login_url='/')
 def dashboard(request):
     user = request.user
-    
+    all_new_reports = CrimeReports.objects.filter(status=False).count()
     context = {
-        'user':user
+        'user':user,
+        'all_new_reports':all_new_reports
     }
     return render(request, "dashboard.html", context)
 
@@ -82,8 +84,10 @@ def user_settings(request):
             messages.success(request, 'Your password has been updated successfully.')
             return redirect('/')
 
+    all_new_reports = CrimeReports.objects.filter(status=False).count()
     context = {
-        'user': user
+        'user':user,
+        'all_new_reports':all_new_reports
     }
     return render(request, "settings.html", context)
 
@@ -114,8 +118,10 @@ def crimeReport(request):
             return redirect('viewReport')
 
     # Render the form page with user information
+    all_new_reports = CrimeReports.objects.filter(status=False).count()
     context = {
-        'user': user
+        'user':user,
+        'all_new_reports':all_new_reports
     }
     return render(request, "crimeReport.html", context)
 
@@ -124,10 +130,12 @@ def viewReport(request):
     user = request.user
     crimes = CrimeReports.objects.filter(user=user).order_by('-id')
     all_crimes = CrimeReports.objects.all().order_by('-id')
+    all_new_reports = CrimeReports.objects.filter(status=False).count()
     context = {
         'user':user,
         'crimes':crimes,
         'all_crimes':all_crimes,
+        'all_new_reports':all_new_reports
     }
     return render(request, "viewReport.html", context)
 

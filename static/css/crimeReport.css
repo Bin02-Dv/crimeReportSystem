@@ -6,6 +6,13 @@
     font-family: 'Arial', sans-serif;
 }
 
+.bg{
+    background-image: url(../img/hd-bg.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
 /* Body styling */
 body {
     display: flex;
@@ -15,7 +22,7 @@ body {
 /* Sidebar */
 .sidebar {
     width: 100vw;
-    background-color: #333;
+    background-color: rgb(51, 51, 51, .9);
     padding: 30px 15px;
     color: #fff;
     box-shadow: 10px 0 15px rgba(0, 0, 0, 0.2);

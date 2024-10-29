@@ -12,18 +12,25 @@
     <!-- Dashboard Structure -->
     <div class="dashboard-container">
         <!-- Sidebar -->
-        <aside class="sidebar">
-            <h2>Dashboard</h2>
-            <ul>
-                <li><a href="/dashboard">Dashboard</a></li>
-                {% if not user.is_superuser %}
-                <li><a href="/crimeReport">Report Crime</a></li>
-                {% endif %}
-                <li><a href="/viewReport">View Reports</a></li>
-                <li><a href="/settings">Settings</a></li>
-                <li><a href="/logout">Logout</a></li>
-            </ul>
-        </aside>
+        <div class="bg">
+            <aside class="sidebar">
+                <h2>Dashboard</h2>
+                <ul>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    {% if not user.is_superuser %}
+                    <li><a href="/crimeReport">Report Crime</a></li>
+                    {% endif %}
+                    <li>
+                        <a href="/viewReport">View Reports</a>
+                        {% if user.is_superuser and all_new_reports %}
+                        <span style="background-color: red; color: white; padding: 5px; border-radius: 50%;">{{all_new_reports}}</span>
+                        {% endif %}
+                    </li>
+                    <li><a href="/settings">Settings</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </aside>
+        </div>
 
         <!-- Main Content -->
         <main class="main-content">
